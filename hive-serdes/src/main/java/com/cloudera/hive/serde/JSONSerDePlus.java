@@ -72,7 +72,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  * 
  * Only STRING keys are supported for Hive MAPs.
  */
-public class JSONSerDe implements SerDe {
+public class JSONSerDePlus implements SerDe {
   
   private StructTypeInfo rowTypeInfo;
   private ObjectInspector rowOI;
