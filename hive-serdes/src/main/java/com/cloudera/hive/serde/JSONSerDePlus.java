@@ -24,6 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hive.serde.serdeConstants;
 import org.apache.hadoop.hive.serde2.SerDe;
@@ -73,6 +77,9 @@ import org.codehaus.jackson.map.ObjectMapper;
  * Only STRING keys are supported for Hive MAPs.
  */
 public class JSONSerDePlus implements SerDe {
+
+  private static final Logger logger =
+    LoggerFactory.getLogger(JSONSerDePlus.class);
   
   private StructTypeInfo rowTypeInfo;
   private ObjectInspector rowOI;
@@ -139,6 +146,8 @@ public class JSONSerDePlus implements SerDe {
     for (String fieldName : rowTypeInfo.getAllStructFieldNames()) {
       try {
         TypeInfo fieldTypeInfo = rowTypeInfo.getStructFieldTypeInfo(fieldName);
+        //logger.debug("fieldName = " + fieldName + ", fieldTypeInfo = " + fieldTypeInfo + ", root = " + root);
+        
         value = parseField(root.get(fieldName), fieldTypeInfo);
       } catch (Exception e) {
         value = null;

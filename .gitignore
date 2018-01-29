@@ -2,3 +2,5 @@ target/
 dependency-reduced-pom.xml
 eclipse-classes
 .*
+sftp-config.*
+*.sublime*
